@@ -41,7 +41,7 @@
 
 
 2. Create Django rest API List, Detailed, create, update, and delete view for all the above Models including User model
-3. Create following API’s:
+3. Create following APIs:
 	*	List all books of specific author that are available in the library
 	*	List all books given a topic (match topic case insensitive way)
 	*	List all Subscribers  who didn’t return (returned=False) who’s subscription expired (expiry = borrowed_date  + days)
