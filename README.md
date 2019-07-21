@@ -1,4 +1,4 @@
-#Instructions:
+# Instructions:
 
 1. Go to url https://repl.it/@AhmadFaizal/PES
 2. Login and open the repo
@@ -6,18 +6,18 @@
 4. Share the link after you edit (when you edit and save it will create a fork of repo into your directory and hence will have a different url)
 
 
-##Problem statement:
+## Problem statement:
 
 1. Create Following model structure and add admin
 
-##Model Class (Tables)
+## Model Class (Tables)
 
-###User - user default Django User
-###Author - Custom Model bellow are fields and its type
+### User - user default Django User
+### Author - Custom Model bellow are fields and its type
 - name - char with max length 25
 - address ­-  text
 
-###Book - Custom Model bellow are fields and its type
+### Book - Custom Model bellow are fields and its type
 - title - char with max length 100
 - description - text
 - count - positive integer
@@ -26,12 +26,12 @@
 - author - array of reference to Author
  
 
-###Subscriber - Custom Model bellow are fields and its type
+### Subscriber - Custom Model bellow are fields and its type
 - user - reference to User table
 - address - text
 - phone - phone number   
 
-###Subscription - Custom Model bellow are fields and its type
+### Subscription - Custom Model bellow are fields and its type
 - subscriber - reference to  Subscriber table
 - book -  reference to  Book table
 - borrowed_date - date( date of creaton)
