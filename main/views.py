@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
 from main import models
 from django.contrib.auth.models import User
 from main.serializers import *
@@ -12,8 +13,15 @@ def home(request):
 
 # Viewsets define the view behavior.
 class UserViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated, )
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    lookup_field = 'username'
+    lookup_url_kwargs = 'username'
+
+    def get_queryset(self):
+        return self.queryset.filter(
+            username=self.request.user.username)
 
 
 class AuthorViewSet(viewsets.ModelViewSet):
