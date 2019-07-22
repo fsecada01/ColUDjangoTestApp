@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from rest_framework import viewsets
+from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from main import models
 from django.contrib.auth.models import User
@@ -23,18 +24,29 @@ class UserViewSet(viewsets.ModelViewSet):
         return self.queryset.filter(
             username=self.request.user.username)
 
+    @action(detail=True)
+    def group_names(self, request, pk=None):
+        '''
+        Returns a list of all the group names to which the selected user
+        belongs
+        '''
 
-class AuthorViewSet(viewsets.ModelViewSet):
+        user = self.get_object()
+        groups = user.groups.all()
+        return Response([group.name for group in groups])
+
+
+class AuthorViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.Author.objects.all()
     serializer_class = AuthorSeralizer
 
 
-class BookViewSet(viewsets.ModelViewSet):
+class BookViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.Book.objects.select_related('author').all()
     serializer_class = BookSerializer
 
 
-class SubscriberViewSet(viewsets.ModelViewSet):
+class SubscriberViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.Subscriber.objects.select_related('user').all()
     serializer_class = SubscriberSerializer
 

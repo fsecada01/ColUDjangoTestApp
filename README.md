@@ -44,6 +44,6 @@
 3. Create following APIs:
 	- [x]	List all books of specific author that are available in the library
 	- [x]	List all books given a topic (match topic case insensitive way)
-	- [ ]	List all Subscribers  who didn’t return (returned=False) who’s subscription expired (expiry = borrowed_date  + days)
+	- [x]	List all Subscribers  who didn’t return (returned=False) who’s subscription expired (expiry = borrowed_date  + days)
 	- [ ]	Add attribute due_amount in Subscription detailed view (due_amount=(Book. subscription_cost[ ] Subscription.days)  - Subscription.amount_paid)
 	- [ ]	Make sure can add subscription only if there is book in library (books in library = Book.count – subscription of book that are not returned)

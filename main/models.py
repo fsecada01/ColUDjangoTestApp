@@ -9,10 +9,18 @@ def time_diff(days):
     return make_aware(datetime.now() - timedelta(days))
 
 
-class OutOfDateSubScriptionManager(models.Manager):
+class OutstandingSubscriptionManager(models.Manager):
     # a qs manager that presumes a subscription date of 30 days or less
     def get_queryset(self):
-        return super().get_queryset().filter(borrowed_date__lte=time_diff(30))
+        return super().get_queryset().filter(
+            borrowed_date__lte=time_diff(30)).filter(returned=False)
+
+
+class ExpiredSubscriptionManager(models.Manager):
+    # a qs manager that presumes a subscription date of 30 days or less
+    def get_queryset(self):
+        return super().get_queryset().filter(
+            borrowed_date__lte=time_diff(30)).filter(returned=True)
 
 
 class BaseUserModel(models.Model):
@@ -61,4 +69,6 @@ class Subscription(models.Model):
 
     objects = models.Manager()
 
-    expired_subs = OutOfDateSubScriptionManager()
+    outstand_subs = OutstandingSubscriptionManager()
+
+    expired_subs = ExpiredSubscriptionManager()
